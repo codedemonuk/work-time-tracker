@@ -213,11 +213,11 @@
                 </div>
                 <div>
                     <label for="startTime">Start Time</label>
-                    <input type="time" id="startTime">
+                    <input type="time" id="startTime" value="09:00">
                 </div>
                 <div>
                     <label for="endTime">End Time</label>
-                    <input type="time" id="endTime">
+                    <input type="time" id="endTime" value="11:45">
                 </div>
             </div>
             <button id="addRow">Add Work Period</button>
@@ -291,9 +291,9 @@
                 // Calculate hours for this row
                 calculateHours(date, startTime, endTime, hoursId);
 
-                // Clear inputs
-                startTimeInput.value = '';
-                endTimeInput.value = '';
+                // Reset inputs to defaults
+                startTimeInput.value = '09:00';
+                endTimeInput.value = '11:45';
 
                 // Recalculate total hours
                 calculateTotalHours();
