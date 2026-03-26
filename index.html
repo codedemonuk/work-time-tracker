@@ -266,19 +266,20 @@
                 }
 
                 // Add row to table
+                const hoursId = `hours-${Date.now()}`;
                 const newRow = document.createElement('tr');
                 newRow.innerHTML = `
                     <td data-raw-date="${date}">${formatDate(date)}</td>
                     <td>${startTime}</td>
                     <td>${endTime}</td>
-                    <td class="time-display" id="hours-${Date.now()}">0h 0m</td>
+                    <td class="time-display" id="${hoursId}">0h 0m</td>
                     <td><button class="delete-btn" onclick="deleteRow(this)">Delete</button></td>
                 `;
 
                 tableBody.appendChild(newRow);
 
                 // Calculate hours for this row
-                calculateHours(date, startTime, endTime, `hours-${Date.now()}`);
+                calculateHours(date, startTime, endTime, hoursId);
 
                 // Clear inputs
                 startTimeInput.value = '';
