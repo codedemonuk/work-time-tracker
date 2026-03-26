@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time Tracker</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            width: 90%;
+            max-width: 900px;
+            padding: 25px;
+            margin: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 2.2rem;
+        }
+
+        .input-section {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .form-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .form-group div {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #34495e;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+
+        input:focus {
+            border-color: #3498db;
+            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+            outline: none;
+        }
+
+        button {
+            background: linear-gradient(to right, #3498db, #2c3e50);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+
+        .summary-section {
+            background-color: #e3f2fd;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .summary-value {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-top: 10px;
+        }
+
+        .summary-label {
+            font-size: 1.1rem;
+            color: #7f8c8d;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        th {
+            background-color: #3498db;
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+
+        tr:hover {
+            background-color: #e3f2fd;
+        }
+
+        .total-row {
+            background-color: #2c3e50;
+            color: white;
+            font-weight: bold;
+        }
+
+        .total-row td {
+            border-bottom: 1px solid #3498db;
+        }
+
+        .delete-btn {
+            background: #e74c3c;
+            padding: 8px 12px;
+            font-size: 14px;
+            margin-left: 5px;
+        }
+
+        .delete-btn:hover {
+            background: #c0392b;
+        }
+
+        .time-display {
+            font-weight: bold;
+            color: #2980b9;
+        }
+
+        .no-entries {
+            text-align: center;
+            padding: 30px;
+            color: #7f8c8d;
+            font-style: italic;
+        }
+
+        @media (max-width: 768px) {
+            .form-group {
+                flex-direction: column;
+            }
+
+            th, td {
+                padding: 10px 8px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Work Time Tracker</h1>
+
+        <div class="input-section">
+            <div class="form-group">
+                <div>
+                    <label for="date">Date</label>
+                    <input type="date" id="date">
+                </div>
+                <div>
+                    <label for="startTime">Start Time</label>
+                    <input type="time" id="startTime">
+                </div>
+                <div>
+                    <label for="endTime">End Time</label>
+                    <input type="time" id="endTime">
+                </div>
+            </div>
+            <button id="addRow">Add Work Period</button>
+        </div>
+
+        <div class="summary-section">
+            <div class="summary-label">Total Hours Worked</div>
+            <div class="summary-value" id="totalHours">0h 0m</div>
+        </div>
+
+        <table id="timeTable">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Start Time</th>
+                    <th>End Time</th>
+                    <th>Hours Worked</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody">
+                <!-- Rows will be added here dynamically -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const dateInput = document.getElementById('date');
+            const startTimeInput = document.getElementById('startTime');
+            const endTimeInput = document.getElementById('endTime');
+            const addRowButton = document.getElementById('addRow');
+            const tableBody = document.getElementById('tableBody');
+            const totalHoursDisplay = document.getElementById('totalHours');
+
+            // Set default date to today
+            const today = new Date().toISOString().split('T')[0];
+            dateInput.value = today;
+
+            // Add row to table
+            addRowButton.addEventListener('click', function() {
+                const date = dateInput.value;
+                const startTime = startTimeInput.value;
+                const endTime = endTimeInput.value;
+
+                // Validate inputs
+                if (!date || !startTime || !endTime) {
+                    alert('Please fill in all fields');
+                    return;
+                }
+
+                // Validate time order
+                if (startTime >= endTime) {
+                    alert('End time must be after start time');
+                    return;
+                }
+
+                // Add row to table
+                const newRow = document.createElement('tr');
+                newRow.innerHTML = `
+                    <td>${formatDate(date)}</td>
+                    <td>${startTime}</td>
+                    <td>${endTime}</td>
+                    <td class="time-display" id="hours-${Date.now()}">0h 0m</td>
+                    <td><button class="delete-btn" onclick="deleteRow(this)">Delete</button></td>
+                `;
+
+                tableBody.appendChild(newRow);
+
+                // Calculate hours for this row
+                calculateHours(date, startTime, endTime, `hours-${Date.now()}`);
+
+                // Clear inputs
+                startTimeInput.value = '';
+                endTimeInput.value = '';
+
+                // Recalculate total hours
+                calculateTotalHours();
+            });
+
+            // Calculate hours for a single row
+            function calculateHours(date, startTime, endTime, elementId) {
+                const start = new Date(`${date}T${startTime}`);
+                const end = new Date(`${date}T${endTime}`);
+
+                const diffMs = end - start;
+                const hours = Math.floor(diffMs / (1000 * 60 * 60));
+                const minutes = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
+
+                document.getElementById(elementId).textContent = `${hours}h ${minutes}m`;
+            }
+
+            // Calculate total hours
+            function calculateTotalHours() {
+                let totalMs = 0;
+
+                const rows = tableBody.querySelectorAll('tr');
+                rows.forEach(row => {
+                    const cells = row.querySelectorAll('td');
+                    if (cells.length >= 4) {
+                        const dateCell = cells[0].textContent;
+                        const startTimeCell = cells[1].textContent;
+                        const endTimeCell = cells[2].textContent;
+
+                        if (dateCell && startTimeCell && endTimeCell) {
+                            const start = new Date(`${dateCell}T${startTimeCell}`);
+                            const end = new Date(`${dateCell}T${endTimeCell}`);
+
+                            totalMs += (end - start);
+                        }
+                    }
+                });
+
+                const hours = Math.floor(totalMs / (1000 * 60 * 60));
+                const minutes = Math.floor((totalMs % (1000 * 60 * 60)) / (1000 * 60));
+
+                totalHoursDisplay.textContent = `${hours}h ${minutes}m`;
+            }
+
+            // Format date for display
+            function formatDate(dateString) {
+                const options = { year: 'numeric', month: 'short', day: 'numeric' };
+                return new Date(dateString).toLocaleDateString(undefined, options);
+            }
+
+            // Delete row function
+            window.deleteRow = function(button) {
+                const row = button.closest('tr');
+                row.remove();
+                calculateTotalHours();
+            };
+
+            // Add some sample data for demonstration
+            setTimeout(() => {
+                const sampleDate = new Date();
+                sampleDate.setDate(sampleDate.getDate() - 1);
+                dateInput.value = sampleDate.toISOString().split('T')[0];
+                startTimeInput.value = '09:00';
+                endTimeInput.value = '12:30';
+                addRowButton.click();
+
+                setTimeout(() => {
+                    dateInput.value = new Date().toISOString().split('T')[0];
+                    startTimeInput.value = '13:00';
+                    endTimeInput.value = '17:45';
+                    addRowButton.click();
+                }, 500);
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
