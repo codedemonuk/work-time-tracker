@@ -268,7 +268,7 @@
                 // Add row to table
                 const newRow = document.createElement('tr');
                 newRow.innerHTML = `
-                    <td>${formatDate(date)}</td>
+                    <td data-raw-date="${date}">${formatDate(date)}</td>
                     <td>${startTime}</td>
                     <td>${endTime}</td>
                     <td class="time-display" id="hours-${Date.now()}">0h 0m</td>
@@ -306,15 +306,18 @@
 
                 const rows = tableBody.querySelectorAll('tr');
                 rows.forEach(row => {
-                    const cells = row.querySelectorAll('td');
-                    if (cells.length >= 4) {
-                        const dateCell = cells[0].textContent;
-                        const startTimeCell = cells[1].textContent;
-                        const endTimeCell = cells[2].textContent;
+                    const dateCell = row.querySelector('td[data-raw-date]');
+                    const startTimeCell = row.querySelector('td:nth-child(2)');
+                    const endTimeCell = row.querySelector('td:nth-child(3)');
 
-                        if (dateCell && startTimeCell && endTimeCell) {
-                            const start = new Date(`${dateCell}T${startTimeCell}`);
-                            const end = new Date(`${dateCell}T${endTimeCell}`);
+                    if (dateCell && startTimeCell && endTimeCell) {
+                        const rawDate = dateCell.getAttribute('data-raw-date');
+                        const startTime = startTimeCell.textContent;
+                        const endTime = endTimeCell.textContent;
+
+                        if (rawDate && startTime && endTime) {
+                            const start = new Date(`${rawDate}T${startTime}`);
+                            const end = new Date(`${rawDate}T${endTime}`);
 
                             totalMs += (end - start);
                         }
