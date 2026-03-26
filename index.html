@@ -339,23 +339,6 @@
                 row.remove();
                 calculateTotalHours();
             };
-
-            // Add some sample data for demonstration
-            setTimeout(() => {
-                const sampleDate = new Date();
-                sampleDate.setDate(sampleDate.getDate() - 1);
-                dateInput.value = sampleDate.toISOString().split('T')[0];
-                startTimeInput.value = '09:00';
-                endTimeInput.value = '12:30';
-                addRowButton.click();
-
-                setTimeout(() => {
-                    dateInput.value = new Date().toISOString().split('T')[0];
-                    startTimeInput.value = '13:00';
-                    endTimeInput.value = '17:45';
-                    addRowButton.click();
-                }, 500);
-            }, 1000);
         });
     </script>
 </body>
