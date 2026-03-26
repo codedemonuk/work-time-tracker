@@ -29,6 +29,7 @@
             max-width: 900px;
             padding: 25px;
             margin: 20px;
+            overflow-x: hidden;
         }
 
         h1 {
@@ -184,9 +185,18 @@
                 flex-direction: column;
             }
 
+            .form-group div {
+                min-width: 100%;
+            }
+
             th, td {
                 padding: 10px 8px;
                 font-size: 14px;
+            }
+
+            #timeTable {
+                display: block;
+                overflow-x: auto;
             }
         }
     </style>
