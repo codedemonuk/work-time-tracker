@@ -1,4 +1,10 @@
+<div align="center">
+
 # Work Time Tracker
+
+[![pages-build-deployment](https://github.com/codedemonuk/work-time-tracker/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/codedemonuk/work-time-tracker/actions/workflows/pages/pages-build-deployment)
+
+</div>
 
 A simple web-based time tracking application for recording work periods and calculating total hours worked.
 
