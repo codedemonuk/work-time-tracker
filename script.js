@@ -7,8 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const totalHoursDisplay = document.getElementById('totalHours');
 
     // Set default date to today
-    const today = new Date().toISOString().split('T')[0];
-    dateInput.value = today;
+    dateInput.value = new Date().toISOString().split('T')[0];
 
     // Add row to table
     addRowButton.addEventListener('click', function() {
