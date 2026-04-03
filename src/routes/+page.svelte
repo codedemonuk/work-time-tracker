@@ -5,8 +5,9 @@
     let startTime = '09:00';
     let endTime = '11:45';
     let entries: TimeEntry[] = [];
-    let showTable = false;
 
+
+    $: showTable = entries.length > 0;
     $: totalHours = calculateTotalHours(entries);
 
     function addEntry(): void {
@@ -28,7 +29,6 @@
             hours: calculateHours(date, startTime, endTime)
         }].sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
 
-        showTable = true;
         date = getNextWeekdayDate(date);
         startTime = '09:00';
         endTime = '11:45';
@@ -36,9 +36,6 @@
 
     function deleteEntry(id: number): void {
         entries = entries.filter((entry: TimeEntry) => entry.id !== id);
-        if (entries.length === 0) {
-            showTable = false;
-        }
     }
 
 </script>
