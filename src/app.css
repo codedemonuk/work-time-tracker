@@ -199,7 +199,6 @@ tr:hover {
     }
 
     #timeTable {
-        display: block;
         overflow-x: auto;
     }
 }
