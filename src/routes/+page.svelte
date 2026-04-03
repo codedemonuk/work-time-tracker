@@ -26,7 +26,7 @@
             startTime,
             endTime,
             hours: calculateHours(date, startTime, endTime)
-        }];
+        }].sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
 
         showTable = true;
         date = getNextWeekdayDate(date);
