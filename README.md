@@ -2,7 +2,7 @@
 
 # Work Time Tracker
 
-[![pages-build-deployment](https://github.com/codedemonuk/work-time-tracker/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/codedemonuk/work-time-tracker/actions/workflows/pages/pages-build-deployment)
+[![Test, Build, Deploy](https://github.com/codedemonuk/work-time-tracker/actions/workflows/ci.yml/badge.svg)](https://github.com/codedemonuk/work-time-tracker/actions/workflows/ci.yml)
 
 </div>
 
