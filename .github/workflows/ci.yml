@@ -18,6 +18,12 @@ jobs:
           cache: 'npm'
       - run: npm ci
       - run: npm run test
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: npm-logs-test
+          path: /home/runner/.npm/_logs/
+          retention-days: 5
 
   build:
     name: Build
@@ -31,6 +37,12 @@ jobs:
           cache: 'npm'
       - run: npm ci
       - run: npm run build
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: npm-logs-build
+          path: /home/runner/.npm/_logs/
+          retention-days: 5
       - uses: actions/upload-pages-artifact@v4
         with:
           path: build
