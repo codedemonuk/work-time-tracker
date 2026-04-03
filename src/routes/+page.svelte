@@ -77,8 +77,7 @@
         <thead>
             <tr>
                 <th>Date</th>
-                <th>Start Time</th>
-                <th>End Time</th>
+                <th>Times</th>
                 <th>Hours Worked</th>
                 <th>Action</th>
             </tr>
@@ -87,8 +86,7 @@
             {#each entries as entry (entry.id)}
                 <tr>
                     <td>{formatDate(entry.date)}</td>
-                    <td>{entry.startTime}</td>
-                    <td>{entry.endTime}</td>
+                    <td>{entry.startTime} ➡️ {entry.endTime}</td>
                     <td class="time-display">{entry.hours}</td>
                     <td><button class="delete-btn" on:click={() => deleteEntry(entry.id)}>Delete</button></td>
                 </tr>
