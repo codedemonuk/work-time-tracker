@@ -34,10 +34,6 @@ The **Total Hours Worked** summary at the top automatically updates whenever you
 - Add a new work period
 - Delete an existing row
 
-## Running the Application
-
-Open `index.html` directly in any modern web browser. No server or build process required.
-
 ## Browser Compatibility
 
 Works in all modern browsers (Chrome, Firefox, Safari, Edge).
