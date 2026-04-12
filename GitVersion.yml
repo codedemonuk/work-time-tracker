@@ -1,0 +1,9 @@
+mode: ContinuousDelivery
+branches:
+  main:
+    label: 'beta'
+  feature: {}
+  develop:
+    label: 'alpha'
+ignore:
+  sha: []
