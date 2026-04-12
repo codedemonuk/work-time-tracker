@@ -1,7 +1,14 @@
 <script lang="ts">
-    import { formatDate, getNextWeekdayDate, calculateHours, calculateTotalHours, type TimeEntry } from '$lib/utils';
+    import {
+        formatDate,
+        getNextWeekdayDate,
+        calculateHours,
+        calculateTotalHours,
+        type TimeEntry,
+        getFirstWeekdayOfMonth
+    } from '$lib/utils';
 
-    let date = new Date().toISOString().split('T')[0];
+    let date = getFirstWeekdayOfMonth(new Date());
     let startTime = '09:00';
     let endTime = '11:45';
     let entries: TimeEntry[] = [];

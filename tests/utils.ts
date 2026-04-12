@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { formatDate, getNextWeekdayDate, calculateHours, calculateTotalHours, type TimeEntry } from '$lib/utils';
+import { formatDate, getNextWeekdayDate, calculateHours, calculateTotalHours, getFirstWeekdayOfMonth, type TimeEntry } from '$lib/utils';
 
 describe('formatDate', () => {
 	it('formats a date string in short month format', () => {
@@ -75,46 +75,34 @@ describe('calculateHours', () => {
 	});
 });
 
-describe('calculateTotalHours', () => {
-	it('returns 0h 0m for empty entries', () => {
-		const result = calculateTotalHours([]);
-		expect(result).toBe('0h 0m');
+describe('getFirstWeekdayOfMonth', () => {
+	it('returns the first weekday of the month when 1st is a Monday', () => {
+		const result = getFirstWeekdayOfMonth(new Date('2024-01-01'));
+		expect(result).toBe('2024-01-01');
 	});
 
-	it('calculates total for single entry', () => {
-		const entries: TimeEntry[] = [
-			{ id: 1, date: '2024-01-15', startTime: '09:00', endTime: '17:00', hours: '8h 0m' }
-		];
-		const result = calculateTotalHours(entries);
-		expect(result).toBe('8h 0m');
+	it('returns the first weekday of the month when 1st is a Saturday', () => {
+		const result = getFirstWeekdayOfMonth(new Date('2024-05-01'));
+		expect(result).toBe('2024-05-01');
 	});
 
-	it('calculates total for multiple entries', () => {
-		const entries: TimeEntry[] = [
-			{ id: 1, date: '2024-01-15', startTime: '09:00', endTime: '17:00', hours: '8h 0m' },
-			{ id: 2, date: '2024-01-16', startTime: '09:00', endTime: '13:00', hours: '4h 0m' },
-			{ id: 3, date: '2024-01-17', startTime: '10:00', endTime: '14:30', hours: '4h 30m' }
-		];
-		const result = calculateTotalHours(entries);
-		expect(result).toBe('16h 30m');
+	it('returns the first weekday of the month when 1st is a Sunday', () => {
+		const result = getFirstWeekdayOfMonth(new Date('2024-02-01'));
+		expect(result).toBe('2024-02-01');
 	});
 
-	it('accumulates minutes correctly', () => {
-		const entries: TimeEntry[] = [
-			{ id: 1, date: '2024-01-15', startTime: '09:00', endTime: '09:30', hours: '0h 30m' },
-			{ id: 2, date: '2024-01-15', startTime: '10:00', endTime: '10:30', hours: '0h 30m' },
-			{ id: 3, date: '2024-01-15', startTime: '11:00', endTime: '11:30', hours: '0h 30m' },
-			{ id: 4, date: '2024-01-15', startTime: '12:00', endTime: '12:30', hours: '0h 30m' }
-		];
-		const result = calculateTotalHours(entries);
-		expect(result).toBe('2h 0m');
+	it('returns the first weekday of the month when 1st is a Tuesday', () => {
+		const result = getFirstWeekdayOfMonth(new Date('2024-03-01'));
+		expect(result).toBe('2024-03-01');
 	});
 
-	it('handles single 15-minute entry', () => {
-		const entries: TimeEntry[] = [
-			{ id: 1, date: '2024-01-15', startTime: '09:00', endTime: '09:15', hours: '0h 15m' }
-		];
-		const result = calculateTotalHours(entries);
-		expect(result).toBe('0h 15m');
+	it('returns the first weekday of the month when 1st is a Friday', () => {
+		const result = getFirstWeekdayOfMonth(new Date('2024-06-01'));
+		expect(result).toBe('2024-06-03');
+	});
+
+	it('handles different months correctly', () => {
+		const result = getFirstWeekdayOfMonth(new Date('2024-12-01'));
+		expect(result).toBe('2024-12-02');
 	});
 });

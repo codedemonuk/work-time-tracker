@@ -34,6 +34,29 @@ export function getNextWeekdayDate(inputDateStr: string): string {
 	return `${year}-${month}-${day}`;
 }
 
+export function getFirstWeekdayOfMonth( now: Date): string {
+	const year = now.getFullYear();
+	const month = now.getMonth();
+
+	// Start from the 1st of the current month
+	const firstDay = new Date(year, month, 1);
+
+	// If the 1st is a weekend, find the next Monday
+	let currentDate = new Date(firstDay);
+
+	// Keep advancing until we hit a weekday (Monday=1, Tuesday=2, ..., Friday=5)
+	while (currentDate.getDay() === 0 || currentDate.getDay() === 6) {
+		currentDate.setDate(currentDate.getDate() + 1);
+	}
+
+	// Format the date as YYYY-MM-DD
+	const yearStr = currentDate.getFullYear();
+	const monthStr = String(currentDate.getMonth() + 1).padStart(2, '0');
+	const dayStr = String(currentDate.getDate()).padStart(2, '0');
+
+	return `${yearStr}-${monthStr}-${dayStr}`;
+}
+
 export function calculateHours(dateStr: string, start: string, end: string): string {
 	const startDate = new Date(`${dateStr}T${start}`);
 	const endDate = new Date(`${dateStr}T${end}`);
