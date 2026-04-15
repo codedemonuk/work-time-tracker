@@ -23,6 +23,32 @@ jobs:
         run: npm ci --include=optional
       - name: Run tests with coverage
         run: npm run coverage
+      - name: Coverage summary
+        run: |
+          echo "## Test Coverage" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          npm install -g istanbul-react-summary 2>/dev/null || true
+          cat coverage/coverage-final.json | node -e "
+            const fs = require('fs');
+            const data = JSON.parse(fs.readFileSync('/dev/stdin', 'utf8'));
+            let totals = { statements: 0, covered: 0, branches: 0, branchesCovered: 0, functions: 0, functionsCovered: 0, lines: 0, linesCovered: 0 };
+            Object.values(data).forEach(file => {
+              totals.statements += file.s.length;
+              totals.covered += Object.values(file.s).filter(v => v > 0).length;
+              totals.branches += Object.keys(file.b).length;
+              totals.branchesCovered += Object.values(file.b).flat().filter(v => v > 0).length;
+              totals.functions += Object.keys(file.f).length;
+              totals.functionsCovered += Object.values(file.f).filter(v => v > 0).length;
+              totals.lines += Object.keys(file.s).length;
+              totals.linesCovered += Object.values(file.s).filter(v => v > 0).length;
+            });
+            console.log('| Metric | % |');
+            console.log('|--------|--|');
+            console.log('| Statements | ' + Math.floor(totals.covered / totals.statements * 100) + '% |');
+            console.log('| Branches | ' + Math.floor(totals.branchesCovered / totals.branches * 100) + '% |');
+            console.log('| Functions | ' + Math.floor(totals.functionsCovered / totals.functions * 100) + '% |');
+            console.log('| Lines | ' + Math.floor(totals.linesCovered / totals.lines * 100) + '% |');
+          " >> $GITHUB_STEP_SUMMARY
       - name: Upload coverage reports
         uses: actions/upload-artifact@v7
         with:
