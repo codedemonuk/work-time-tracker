@@ -20,7 +20,7 @@ jobs:
           node-version: '24'
           cache: 'npm'
       - name: Install dependencies
-        run: npm ci
+        run: npm ci --include=optional
       - name: Run tests with coverage
         run: npm run coverage
       - name: Upload coverage reports
@@ -70,7 +70,7 @@ jobs:
           node-version: '24'
           cache: 'npm'
       - name: Install dependencies
-        run: npm ci
+        run: npm ci --include=optional
       - name: Update package.json version
         run: |
           npm pkg set version=${{ steps.gitversion.outputs.fullSemVer }}
