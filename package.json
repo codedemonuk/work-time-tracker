@@ -10,7 +10,8 @@
     "build": "vite build",
     "preview": "vite preview",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "coverage": "vitest run --coverage"
   },
   "devDependencies": {
     "@sveltejs/adapter-auto": "^3.0.0",
@@ -19,6 +20,7 @@
     "@sveltejs/vite-plugin-svelte": "^3.0.0",
     "@testing-library/svelte": "^5.3.1",
     "@types/node": "^25.5.2",
+    "@vitest/coverage-istanbul": "^4.1.4",
     "jsdom": "^29.0.1",
     "svelte": "^4.2.0",
     "svelte-check": "^4.4.6",

@@ -23,6 +23,14 @@ jobs:
         run: npm ci
       - name: Run tests
         run: npm run test
+      - name: Run coverage
+        run: npm run coverage
+      - name: Upload coverage reports
+        uses: actions/upload-artifact@v7
+        with:
+          name: coverage-report
+          path: coverage
+          retention-days: 30
       - name: Upload npm logs on failure
         uses: actions/upload-artifact@v7
         if: failure()

@@ -7,5 +7,9 @@ export default defineConfig({
 		include: ['tests/**/*.{js,ts}'],
 		environment: 'jsdom',
 		globals: true
+	},
+	coverage: {
+		provider: 'istanbul',
+		reporter: ['text', 'json', 'html']
 	}
 });
