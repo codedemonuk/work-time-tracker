@@ -6,6 +6,11 @@ export default defineConfig({
 	test: {
 		include: ['tests/**/*.{js,ts}'],
 		environment: 'jsdom',
-		globals: true
+		globals: true,
+		reporters: ['default', ['@d2t/vitest-ctrf-json-reporter', {}]]
+	},
+	coverage: {
+		provider: 'istanbul',
+		reporter: ['text', 'json', 'html']
 	}
 });
