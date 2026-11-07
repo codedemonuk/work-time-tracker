@@ -34,6 +34,10 @@ The **Total Hours Worked** summary at the top automatically updates whenever you
 - Add a new work period
 - Delete an existing row
 
+### Data Storage
+
+Work periods are saved to the browser's **IndexedDB**, so they persist across page reloads and browser sessions. Data is stored locally in your browser and is never sent to a server.
+
 ## Browser Compatibility
 
 Works in all modern browsers (Chrome, Firefox, Safari, Edge).

@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { onMount } from 'svelte';
     import {
         formatDate,
         getNextWeekdayDate,
@@ -7,6 +8,7 @@
         type TimeEntry,
         getFirstWeekdayOfMonth
     } from '$lib/utils';
+    import { getEntries, saveEntries } from '$lib/db';
 
     let date = getFirstWeekdayOfMonth(new Date());
     let startTime = '09:00';
@@ -16,6 +18,26 @@
 
     $: showTable = entries.length > 0;
     $: totalHours = calculateTotalHours(entries);
+
+    onMount(() => {
+        getEntries()
+            .then((saved) => {
+                entries = saved.sort(byDate);
+            })
+            .catch((error) => {
+                console.error('Failed to load entries from IndexedDB', error);
+            });
+    });
+
+    function byDate(a: TimeEntry, b: TimeEntry): number {
+        return new Date(a.date).getTime() - new Date(b.date).getTime();
+    }
+
+    function persist(): void {
+        saveEntries(entries).catch((error) => {
+            console.error('Failed to save entries to IndexedDB', error);
+        });
+    }
 
     function addEntry(): void {
         if (!date || !startTime || !endTime) {
@@ -34,7 +56,9 @@
             startTime,
             endTime,
             hours: calculateHours(date, startTime, endTime)
-        }].sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+        }].sort(byDate);
+
+        persist();
 
         date = getNextWeekdayDate(date);
         startTime = '09:00';
@@ -43,6 +67,7 @@
 
     function deleteEntry(id: number): void {
         entries = entries.filter((entry: TimeEntry) => entry.id !== id);
+        persist();
     }
 
 </script>
