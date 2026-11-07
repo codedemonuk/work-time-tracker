@@ -21,7 +21,7 @@
     "@sveltejs/vite-plugin-svelte": "^7.1.2",
     "@testing-library/svelte": "^5.3.1",
     "@types/node": "^25.5.2",
-    "@vitest/coverage-istanbul": "^4.1.4",
+    "@vitest/coverage-istanbul": "^5.1.0",
     "fake-indexeddb": "^6.2.7",
     "jsdom": "^29.0.1",
     "svelte": "^5.56.3",
@@ -29,11 +29,11 @@
     "svelte-preprocess": "^6.0.3",
     "typescript": "^5.9.3",
     "vite": "^8.3.6",
-    "vitest": "^4.1.2"
+    "vitest": "^5.1.0"
   },
   "type": "module",
   "dependencies": {
-    "@vitest/coverage-v8": "^4.1.2"
+    "@vitest/coverage-v8": "^5.1.0"
   },
   "optionalDependencies": {
     "@emnapi/core": "*",
