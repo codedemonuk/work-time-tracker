@@ -11,23 +11,26 @@ function openDb(): Promise<IDBDatabase> {
 		return Promise.reject(new Error('IndexedDB is not available'));
 	}
 
-	if (!dbPromise) {
-		dbPromise = new Promise((resolve, reject) => {
-			const request = indexedDB.open(DB_NAME, DB_VERSION);
-
-			request.onupgradeneeded = () => {
-				const db = request.result;
-				if (!db.objectStoreNames.contains(STORE_NAME)) {
-					db.createObjectStore(STORE_NAME, { keyPath: 'id' });
-				}
-			};
-
-			request.onsuccess = () => resolve(request.result);
-			request.onerror = () => reject(request.error);
-		});
-	}
+	dbPromise ??= openDatabase();
 
 	return dbPromise;
+}
+
+function openDatabase(): Promise<IDBDatabase> {
+	return new Promise((resolve, reject) => {
+		const request = indexedDB.open(DB_NAME, DB_VERSION);
+
+		request.onupgradeneeded = () => {
+			const db = request.result;
+
+			if (!db.objectStoreNames.contains(STORE_NAME)) {
+				db.createObjectStore(STORE_NAME, { keyPath: 'id' });
+			}
+		};
+
+		request.onsuccess = () => resolve(request.result);
+		request.onerror = () => reject(request.error);
+	});
 }
 
 /**
