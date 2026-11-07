@@ -7,8 +7,8 @@
         calculateTotalHours,
         type TimeEntry,
         getFirstWeekdayOfMonth
-    } from '$lib/utils';
-    import { getEntries, saveEntries } from '$lib/db';
+    } from '#lib/utils.js';
+    import { getEntries, saveEntries } from '#lib/db.js';
 
     let date = getFirstWeekdayOfMonth(new Date());
     let startTime = '09:00';
