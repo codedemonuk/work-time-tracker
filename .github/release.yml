@@ -20,6 +20,7 @@ changelog:
         - Semver-Patch
         - maintenance
         - dependency
+        - dependencies
         - documentation
     - title: Other Changes
       labels:
