@@ -1,9 +1,135 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180">
-  <rect width="180" height="180" rx="36" fill="#4A90D9"/>
-  <g transform="translate(90,90)">
-    <path d="M-35-60h70l-10 35h-50L-35-60z" fill="#fff"/>
-    <path d="M-35 60h70l10-35h-50L-35 60z" fill="#fff"/>
-    <path d="M-40-60h80v12c0 3-1 5-3 7l-18 15v40l18 15c2 2 3 4 3 7v12h-5c-5 0-10-5-10-10h-10l10 10h20l-10-10h-10c0 5-5 10-10 10h-5v-12c0-3 1-5 3-7l18-15V24l-18-15c-2-2-3-4-3-7v-12h-5c-5 0-10-5-10-10h-10l10 10h20l-10-10h-10c0 5-5 10-10 10h-5v-12c0-3 1-5 3-7l18-15V-9l-18 15c-2 2-3 4-3 7v12h-5c-5 0-10-5-10-10h-10l10 10h20l-10-10h-10c0 5-5 10-10 10h-5v-12c0-3 1-5 3-7l18-15V-60h80v12c0 3-1 5-3 7l-18 15v40l18 15c2 2 3 4 3 7v12z" fill="#fff"/>
-    <ellipse cx="0" cy="5" rx="15" ry="10" fill="#fff" opacity="0.4"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0.9" y2="1">
+      <stop offset="0" stop-color="#35B8FF"/>
+      <stop offset="1" stop-color="#0874E8"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="0.85" y2="1">
+      <stop offset="0" stop-color="#FFE85A"/>
+      <stop offset=".48" stop-color="#FFB900"/>
+      <stop offset="1" stop-color="#F47700"/>
+    </linearGradient>
+    <linearGradient id="goldLight" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFF27A"/>
+      <stop offset="1" stop-color="#FFAA00"/>
+    </linearGradient>
+    <linearGradient id="face" x1="0" y1="0" x2="0.2" y2="1">
+      <stop offset="0" stop-color="#FFF9E9"/>
+      <stop offset="1" stop-color="#F4DFC0"/>
+    </linearGradient>
+    <linearGradient id="bell" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FFF07A"/>
+      <stop offset=".6" stop-color="#FFBD12"/>
+      <stop offset="1" stop-color="#F47B00"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="170%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="18"/>
+      <feOffset dy="18"/>
+      <feComponentTransfer><feFuncA type="linear" slope=".28"/></feComponentTransfer>
+      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="soft" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="7"/>
+    </filter>
+  </defs>
+
+  <!-- Full-bleed blue tile; iOS applies its own rounded mask. -->
+  <rect width="1024" height="1024" rx="220" fill="url(#bg)"/>
+  <ellipse cx="515" cy="900" rx="330" ry="48" fill="#003F9E" opacity=".28" filter="url(#soft)"/>
+
+  <!-- Little celebratory rays -->
+  <g fill="#FFE13B">
+    <rect x="116" y="160" width="54" height="148" rx="27" transform="rotate(-34 143 234)"/>
+    <rect x="75" y="300" width="54" height="128" rx="27" transform="rotate(-66 102 364)"/>
+    <path d="M855 174l32-40 18 58z"/>
   </g>
+
+  <!-- Feet -->
+  <g filter="url(#shadow)">
+    <path d="M250 820c-8 66 35 100 116 100h77c56 0 76-40 48-82l-50-70z" fill="url(#gold)"/>
+    <path d="M610 830c-12 58 24 91 90 91h92c55 0 72-37 45-78l-55-72z" fill="url(#gold)"/>
+  </g>
+
+  <!-- Arms -->
+  <g fill="none" stroke="#F6E5D1" stroke-width="76" stroke-linecap="round">
+    <path d="M285 570c-88 25-130-8-150-85"/>
+    <path d="M745 625c95 16 117 78 91 139"/>
+  </g>
+  <g fill="#FFF6E9" stroke="#E9D6C2" stroke-width="8">
+    <circle cx="130" cy="451" r="61"/>
+    <circle cx="177" cy="416" r="50"/>
+    <circle cx="181" cy="474" r="43"/>
+    <circle cx="841" cy="769" r="57"/>
+    <circle cx="887" cy="719" r="48"/>
+    <circle cx="900" cy="784" r="39"/>
+  </g>
+
+  <!-- Bell supports -->
+  <g fill="#9C4B13">
+    <path d="M350 227l26-94 65 14-4 102z"/>
+    <path d="M650 230l31-90 65 15-8 104z"/>
+  </g>
+  <!-- Bells -->
+  <g filter="url(#shadow)">
+    <path d="M258 280c-3-91 43-154 115-160 78-7 133 52 145 130l-8 48-244 34z" fill="url(#bell)"/>
+    <path d="M646 245c15-84 75-132 147-119 74 14 111 82 99 169l-20 42-244-38z" fill="url(#bell)"/>
+    <path d="M269 296c38 30 191 52 251 0l-8 30c-47 52-189 40-236 0z" fill="#E96B00" opacity=".75"/>
+    <path d="M649 280c43 41 183 66 236 25l-13 34c-55 42-184 14-232-27z" fill="#E96B00" opacity=".75"/>
+  </g>
+  <!-- Top winding knob -->
+  <rect x="475" y="112" width="76" height="82" rx="27" fill="#B97842"/>
+  <rect x="443" y="92" width="140" height="62" rx="30" fill="#D6B49A" stroke="#A86B42" stroke-width="9"/>
+  <path d="M466 106h94" stroke="#FFF1DF" stroke-width="9" stroke-linecap="round" opacity=".8"/>
+
+  <!-- Main clock body -->
+  <g filter="url(#shadow)">
+    <circle cx="512" cy="555" r="365" fill="#D95A00"/>
+    <circle cx="512" cy="535" r="365" fill="url(#gold)" stroke="#FFD43B" stroke-width="13"/>
+    <circle cx="512" cy="535" r="307" fill="url(#face)" stroke="#F7C66B" stroke-width="12"/>
+  </g>
+  <path d="M292 300c83-85 198-112 300-91" fill="none" stroke="#FFF5B7" stroke-width="18" stroke-linecap="round" opacity=".62"/>
+
+  <!-- Clock marks -->
+  <g stroke="#28233F" stroke-width="22" stroke-linecap="round">
+    <path d="M512 270v34"/>
+    <path d="M696 346l-25 25"/>
+    <path d="M775 535h-35"/>
+    <path d="M696 721l-25-25"/>
+    <path d="M512 800v-35"/>
+    <path d="M328 721l25-25"/>
+    <path d="M249 535h35"/>
+    <path d="M328 346l25 25"/>
+  </g>
+
+  <!-- Face: eyebrows, eyes and blush -->
+  <g fill="#251E2E">
+    <path d="M392 393q28-27 62-7" fill="none" stroke="#251E2E" stroke-width="17" stroke-linecap="round"/>
+    <path d="M570 386q34-20 64 8" fill="none" stroke="#251E2E" stroke-width="17" stroke-linecap="round"/>
+    <ellipse cx="410" cy="455" rx="35" ry="49"/>
+    <ellipse cx="614" cy="455" rx="35" ry="49"/>
+  </g>
+  <g fill="#fff">
+    <circle cx="420" cy="438" r="11"/>
+    <circle cx="624" cy="438" r="11"/>
+  </g>
+  <g fill="#FF8D8D" opacity=".72">
+    <ellipse cx="333" cy="555" rx="36" ry="19"/>
+    <ellipse cx="691" cy="555" rx="36" ry="19"/>
+  </g>
+
+  <!-- Hands -->
+  <g stroke="#28233F" stroke-width="30" stroke-linecap="round">
+    <path d="M512 535L365 466"/>
+    <path d="M512 535l166-69"/>
+  </g>
+  <circle cx="512" cy="535" r="42" fill="url(#goldLight)" stroke="#F5A900" stroke-width="7"/>
+
+  <!-- Big happy open smile -->
+  <path d="M428 600q84 55 168 0 12 88-84 99-96-11-84-99z" fill="#54201F"/>
+  <path d="M448 655q64 55 128 0-12 43-64 48-52-5-64-48z" fill="#FF5B69"/>
+  <path d="M445 604q67 35 134 0" fill="none" stroke="#FFF1DF" stroke-width="10" stroke-linecap="round"/>
+
+  <!-- Small glossy highlights -->
+  <ellipse cx="365" cy="255" rx="45" ry="18" fill="#FFF7B5" opacity=".45" transform="rotate(-35 365 255)"/>
+  <ellipse cx="720" cy="270" rx="42" ry="16" fill="#FFF7B5" opacity=".4" transform="rotate(-35 720 270)"/>
 </svg>
