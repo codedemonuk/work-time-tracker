@@ -7,17 +7,16 @@
         calculateTotalHours,
         type TimeEntry,
         getFirstWeekdayOfMonth
-    } from '$lib/utils';
-    import { getEntries, saveEntries } from '$lib/db';
+    } from '#lib/utils.js';
+    import { getEntries, saveEntries } from '#lib/db.js';
 
-    let date = getFirstWeekdayOfMonth(new Date());
-    let startTime = '09:00';
-    let endTime = '11:45';
-    let entries: TimeEntry[] = [];
+    let date = $state(getFirstWeekdayOfMonth(new Date()));
+    let startTime = $state('09:00');
+    let endTime = $state('11:45');
+    let entries = $state<TimeEntry[]>([]);
 
-
-    $: showTable = entries.length > 0;
-    $: totalHours = calculateTotalHours(entries);
+    const showTable = $derived(entries.length > 0);
+    const totalHours = $derived(calculateTotalHours(entries));
 
     onMount(() => {
         getEntries()
@@ -34,7 +33,8 @@
     }
 
     function persist(): void {
-        saveEntries(entries).catch((error) => {
+        // Snapshot the reactive state into plain objects before structured-cloning into IndexedDB
+        saveEntries($state.snapshot(entries)).catch((error) => {
             console.error('Failed to save entries to IndexedDB', error);
         });
     }
@@ -94,7 +94,7 @@
                 <input type="time" id="endTime" bind:value={endTime}>
             </div>
         </div>
-        <button on:click={addEntry}>Add Work Period</button>
+        <button onclick={addEntry}>Add Work Period</button>
     </div>
 
     <div class="summary-section">
@@ -117,7 +117,7 @@
                     <td>{formatDate(entry.date)}</td>
                     <td>{entry.startTime} ➡️ {entry.endTime}</td>
                     <td class="time-display">{entry.hours}</td>
-                    <td><button class="delete-btn" on:click={() => deleteEntry(entry.id)}>Delete</button></td>
+                    <td><button class="delete-btn" onclick={() => deleteEntry(entry.id)}>Delete</button></td>
                 </tr>
             {/each}
         </tbody>

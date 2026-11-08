@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeEach } from 'vitest';
 import 'fake-indexeddb/auto';
-import { getEntries, saveEntries } from '$lib/db';
-import type { TimeEntry } from '$lib/utils';
+import { getEntries, saveEntries } from '#lib/db.js';
+import type { TimeEntry } from '#lib/utils.js';
 
 function entry(id: number, date = '2026-11-02'): TimeEntry {
 	return {

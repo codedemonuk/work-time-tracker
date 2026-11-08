@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { formatDate, getNextWeekdayDate, calculateHours, calculateTotalHours, getFirstWeekdayOfMonth, type TimeEntry } from '$lib/utils';
+import { formatDate, getNextWeekdayDate, calculateHours, calculateTotalHours, getFirstWeekdayOfMonth, type TimeEntry } from '#lib/utils.js';
 
 describe('formatDate', () => {
 	it('formats a date string in short month format', () => {
