@@ -22,6 +22,11 @@
         getEntries()
             .then((saved) => {
                 entries = saved.sort(byDate);
+
+                const lastEntry = entries.at(-1);
+                if (lastEntry) {
+                    date = getNextWeekdayDate(lastEntry.date);
+                }
             })
             .catch((error) => {
                 console.error('Failed to load entries from IndexedDB', error);
